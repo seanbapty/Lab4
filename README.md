@@ -1,5 +1,7 @@
 Lab4
 ====
+
+
 \begin{table}[h]
 \begin{tabular}{lllll}
 Size   & Signed/Unsigned & Type            & Min value      & Max value \\

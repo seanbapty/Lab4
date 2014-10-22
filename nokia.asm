@@ -348,7 +348,6 @@ drawBlock:
 	push	R5
 	push	R12
 	push	R13
-	push	R14
 
 	rla.w	R13					; the column address needs multiplied
 	rla.w	R13					; by 8in order to convert it into a
@@ -356,15 +355,7 @@ drawBlock:
 	call	#setAddress			; move cursor to upper left corner of block
 
 	mov		#1, R12
-	cmp		#1, R14
-	jnz		filled
-	jz		notFilled
-filled
 	mov		#0xFF, R6
-	jmp		draw
-notFilled
-	mov		#0x0,  R6
-draw
 	mov.w	R6, R13
 	mov.w	#0x08, R5			; loop all 8 pixel columns
 loopdB:
@@ -372,7 +363,6 @@ loopdB:
 	dec.w	R5
 	jnz		loopdB
 
-	pop		R14
 	pop		R13
 	pop		R12
 	pop		R5

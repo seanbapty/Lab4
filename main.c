@@ -44,8 +44,8 @@ void main() {
 	clearDisplay();
 
 	while(1) {
-		if(xPos>10){
-			xVelocity=-xVelocity;
+		if(xPos>10){							//checks boundary conditions
+			xVelocity=-xVelocity;				//in x and y respectively
 		}
 		if(xPos<=0){
 			xVelocity=-xVelocity;
@@ -57,11 +57,11 @@ void main() {
 			yVelocity=-yVelocity;
 		}
 
-		xPos=xPos+xVelocity;
-		yPos=yPos+yVelocity;
+		xPos=xPos+xVelocity;					//moves ball in x and y
+		yPos=yPos+yVelocity;					//8 pixels or the ball size
 
 		drawBlock(yPos,xPos);
-		__delay_cycles(16000000);
+		__delay_cycles(16000000);				//delay of 1s
 		clearDisplay();
 
 		}

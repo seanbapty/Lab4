@@ -9,7 +9,7 @@ extern void drawBlock(unsigned char row, unsigned char col, unsigned char color)
 #define		FALSE			0
 #define		UP_BUTTON		(P2IN & BIT5)
 #define		DOWN_BUTTON		(P2IN & BIT4)
-#define		AUX_BUTTON		(P2IN & BIT3)
+#define		AUX_BUTTON		(P2IN & BIT3)		//to be used to toggle color
 #define		LEFT_BUTTON		(P2IN & BIT2)
 #define		RIGHT_BUTTON	(P2IN & BIT1)
 

@@ -357,8 +357,8 @@ drawBlock:
 
 	mov		#1, R12
 	cmp		#1, R14
-	jnz		filled
-	jz		notFilled
+	jnz		filled				; if the color varible (R14 holds a 1)
+	jz		notFilled			; it will be filled
 filled
 	mov		#0xFF, R6
 	jmp		draw

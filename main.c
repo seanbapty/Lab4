@@ -1,3 +1,11 @@
+/*
+ Sean Bapty
+ ECE 382 T5
+ 22 October
+ Basic B functionality of a bouncing ball
+ Documentation:See Readme
+ */
+
 #include <msp430g2553.h>
 
 //delayfunction__delay_cycles(160000)
@@ -14,13 +22,13 @@ extern void drawBlock(unsigned char row, unsigned char col);
 #define		AUX_BUTTON		(P2IN & BIT3)
 #define		LEFT_BUTTON		(P2IN & BIT2)
 #define		RIGHT_BUTTON	(P2IN & BIT1)
-#define		XSTART_POSITION	3
-#define		YSTART_POSITION	3
-
+#define		XSTART_POSITION	3					//starting location given that
+#define		YSTART_POSITION	3					//xmax is 10 and ymax is 6 based
+												//on the ball size and screen size
 
 void main() {
 
-	char	xPos, yPos, xVelocity, yVelocity;
+	char	xPos, yPos, xVelocity, yVelocity;	//location and vector variables
 	xPos=XSTART_POSITION;
 	yPos=YSTART_POSITION;
 	xVelocity=1;

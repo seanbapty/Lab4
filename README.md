@@ -1,6 +1,5 @@
 Lab4
 ====
-#Lab
 ##Objectives
 The purpose of this lab was to combine assembly and c code to build an "etch-a-sketch-type program." 
 ###Required Functionality
@@ -55,5 +54,75 @@ What is the role of the .global directive in an .asm file (used in lines 28-32)?
 
 The .global is the flip side of the extern directive. In the lab code the .global definition of things like the clear display are compiled independently of the code where they are used, and then put together during linking.
 
+#Code
+##Pseduo Code
+No pseduo code was written to this lab because the solution was readily apparent. The C code needed to be modified so that it didn't clear the screen after the block was moved, and the drawBlock function needed to include the blocks color and change the color based on input from the button.
+##Required Code
+For complete implementation reference the file in this repository. The code below include the modifications to the c file needed for the required functionality.
+
+```
+extern void drawBlock(unsigned char row, unsigned char col, unsigned char color);
+```
+...
+```
+	unsigned char	x, y, button_press,color; 					//added color char
+
+	// === Initialize system ================================================
+	IFG1=0; /* clear interrupt flag1 */
+	WDTCTL=WDTPW+WDTHOLD; /* stop WD */
+	button_press = FALSE;
+
+
+	init();
+	initNokia();
+	clearDisplay();
+	x=4;		y=4;	color = 1;
+	drawBlock(y,x,color);						//added color as an input
+	```
+	...
+```
+else if (AUX_BUTTON == 0){
+	color = -color;
+	button_press = TRUE;
+}
+```
+
+The assembly file Nokia.asm was also modified to handle the additional color input and act appropriatly. Below are the changes made to this file.
+```
+drawBlock:
+	push	R5
+	push	R12
+	push	R13
+	push	R14
+
+	rla.w	R13					; the column address needs multiplied
+	rla.w	R13					; by 8in order to convert it into a
+	rla.w	R13					; pixel address.
+	call	#setAddress			; move cursor to upper left corner of block
+
+	mov		#1, R12
+	cmp		#1, R14
+	jnz		filled				; if the color varible (R14 holds a 1)
+	jz		notFilled			; it will be filled
+filled
+	mov		#0xFF, R6
+	jmp		draw
+notFilled
+	mov		#0x0,  R6
+draw
+	mov.w	R6, R13
+	mov.w	#0x08, R5			; loop all 8 pixel columns
+loopdB:
+	call	#writeNokiaByte		; draw the pixels
+	dec.w	R5
+	jnz		loopdB
+
+	pop		R14
+	pop		R13
+	pop		R12
+	pop		R5
+
+	ret							; return whence you came
+```
 ####Documentation
 I referenced C2C Arneberg's gitHub to check my table answers with another cadet's. I also used Wikipedia to refresh my memory of external variables.

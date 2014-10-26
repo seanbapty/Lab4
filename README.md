@@ -17,5 +17,14 @@ What is the role of the .global directive in an .asm file (used in lines 28-32)?
 
 The .global is the flip side of the extern directive. In the lab code the .global definition of things like the clear display are compiled independently of the code where they are used, and then put together during linking.
 
+#Lab
+##Objectives
+The purpose of this lab was to combine assembly and c code to build an "etch-a-sketch-type program." 
+
+##Preliminary Design
+see Prelab section for work done prior to coding including building tables of the functions of registers and how information is passed to the Nokia LCD.
+
+##
+
 ####Documentation
 I referenced C2C Arneberg's gitHub to check my table answers with another cadet's. I also used Wikipedia to refresh my memory of external variables.

@@ -5,6 +5,7 @@ Lab4
 The purpose of this lab was to combine assembly and c code to build an "etch-a-sketch-type program." 
 ###Required Functionality
 The required functionality will allow a user to draw/erase 8x8 pixel blocks on a Nokia LCD screen. The draw/erase function will be toggled by input from the LCD's auxilary button. The following table shows the buttons on the LCD to move the block and toggle the color.
+
 | Button    | Function                            |
 |-----------|-------------------------------------|
 | SW5/Up    | Move the cursor up 1 block          |
@@ -12,6 +13,7 @@ The required functionality will allow a user to draw/erase 8x8 pixel blocks on a
 | SW2/Left  | Move the cursor left 1 block        |
 | SW1/Right | Move the cursor right 1 block       |
 | SW3/Aux   | Toggle the color of the paint brush |
+
 ###B Functionality
 B functionality will display an 8x8 block that moves a maximum of 8 pixels at a time and "bounces" each side of the screen.
 ###A Functionality

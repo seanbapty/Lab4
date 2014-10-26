@@ -78,8 +78,8 @@ extern void drawBlock(unsigned char row, unsigned char col, unsigned char color)
 	clearDisplay();
 	x=4;		y=4;	color = 1;
 	drawBlock(y,x,color);						//added color as an input
-	```
-	...
+```
+...
 ```
 else if (AUX_BUTTON == 0){
 	color = -color;
@@ -88,6 +88,7 @@ else if (AUX_BUTTON == 0){
 ```
 
 The assembly file Nokia.asm was also modified to handle the additional color input and act appropriatly. Below are the changes made to this file.
+
 ```
 drawBlock:
 	push	R5
@@ -124,5 +125,6 @@ loopdB:
 
 	ret							; return whence you came
 ```
+
 ####Documentation
 I referenced C2C Arneberg's gitHub to check my table answers with another cadet's. I also used Wikipedia to refresh my memory of external variables.

@@ -311,5 +311,60 @@ endGame(){
 	while(1);
 }
 ```
+
+##Bonus Functionality
+For the bonus functionality, the C code for the B functionality was used, and below is the assembly draw block function where the only modifications were made.
+```
+drawBlock:
+	push	R5
+	push	R12
+	push	R13
+
+	rla.w	R13					; the column address needs multiplied
+	rla.w	R13					; by 8in order to convert it into a
+	rla.w	R13					; pixel address.
+	call	#setAddress			; move cursor to upper left corner of block
+
+	mov		#1, R12
+	mov		#0x3C, R6
+	mov.w	R6, R13
+	mov.w	#0x08, R5			; loop all 8 pixel columns
+loopdB:
+	call	#writeNokiaByte		; draw the pixels
+	dec.w	R5
+	cmp		#7, R5
+	jz		secondBall
+	cmp		#2, R5
+	jz		secondBall
+	cmp		#1, R5
+	jz		firstBall
+midBall:
+	mov		#0xFF, R6			;draws the middle part of the ball where
+	mov.w	R6, R13				;all 8 pixels are filled in
+	jmp		loopdB
+firstBall:
+	mov		#0x3C, R6			;draws the first part of the ball where only
+	mov.w	R6, R13				;the middle 4 pixels are filled
+	call	#writeNokiaByte
+	jmp		endBall
+secondBall:
+	mov		#0x7E, R6			;middle 6 pixels are filled
+	mov.w	R6, R13
+	jmp		loopdB
+endBall:
+	pop		R13
+	pop		R12
+	pop		R5
+
+	ret							; return whence you came
+```
+#Debugging
+There were no errors encountered during the building of the required functionality.
+While building the B Functionality, the block was originally bouncing between 2 points rather than the whole screen. The reason for this was eventually determined to be the fact that the velocity of the ball was defined as a unsigned char. This did not allow the ball to properly change directions. This was fixed by changing the velocity type to char.
+#Testing Methodology/Results
+All of the functionality could be physically observed, thus it was all done by loading the program onto the MSP430 and observing the behavior displayed on the LCD. 
+#Observations/Conclusions
+The biggest takeaway from this lab is the different strengths/weaknesses of assembly and C programming. Assembly allows for a much greater level of control of variables, however implementing things like loops is much more difficult. Fortunatly, assembly and C can be combined to meet the end purpose with the greatest ease.
 ####Documentation
 I referenced C2C Arneberg's gitHub to check my table answers with another cadet's. I also used Wikipedia to refresh my memory of external variables.
+With his permission, I also referenced C2C Ruprect's ReadMe for tips on formatting because he "always gets a hundo". 
